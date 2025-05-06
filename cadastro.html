@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cheirinho de Bolo - Cadastro</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #FF8A8A; /* Rosa suave */
+      --secondary-color: #FFF5F5; /* Fundo rosado claro */
+      --accent-color: #FCC8C8; /* Rosa pêssego */
+      --brown-color: #D4A59A; /* Marrom rosado */
+      --dark-accent: #E75480; /* Rosa mais intenso */
+      --text-color: #5A5A5A;
+    }
+    
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background-color: var(--secondary-color);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      color: var(--text-color);
+      background-image: url('https://transparenttextures.com/patterns/cream-paper.png');
+    }
+    
+    .container-custom {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(231, 84, 128, 0.15);
+      overflow: hidden;
+      width: 900px;
+      min-height: 550px;
+      position: relative;
+      border: 1px solid rgba(255, 138, 138, 0.3);
+    }
+    
+    .content {
+      display: flex;
+      height: 100%;
+    }
+    
+    .left-panel {
+      background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+      color: white;
+      padding: 4rem 3rem;
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .left-panel::before {
+      content: "";
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 200px;
+      height: 200px;
+      background-color: white;
+      opacity: 0.2;
+      border-radius: 50%;
+    }
+    
+    .left-panel::after {
+      content: "";
+      position: absolute;
+      bottom: -80px;
+      left: -30px;
+      width: 250px;
+      height: 250px;
+      background-color: white;
+      opacity: 0.1;
+      border-radius: 50%;
+    }
+    
+    .left-panel h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      position: relative;
+      z-index: 1;
+      font-family: 'Pacifico', cursive;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .left-panel p {
+      font-size: 1rem;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .right-panel {
+      padding: 4rem 3rem;
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: white;
+      position: relative;
+    }
+    
+    .right-panel h2 {
+      color: var(--dark-accent);
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      font-weight: 600;
+      text-align: center;
+      font-family: 'Pacifico', cursive;
+    }
+    
+    .input-group {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+    
+    .input-group i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--brown-color);
+      z-index: 10;
+    }
+    
+    .form-control {
+      height: 50px;
+      border-radius: 8px;
+      padding-left: 45px;
+      border: 1px solid #FFE0E0;
+      transition: all 0.3s;
+      background-color: var(--secondary-color);
+    }
+    
+    .form-control:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 0.25rem rgba(255, 138, 138, 0.25);
+      background-color: white;
+    }
+    
+    /* Estilos de botões temáticos para confeitaria */
+    .btn-cadastrar {
+      border: none;
+      height: 50px;
+      border-radius: 8px;
+      font-weight: 600;
+      width: 100%;
+      margin-top: 10px;
+      transition: all 0.3s;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      font-family: 'Quicksand', sans-serif;
+    }
+    
+    /* Botão 1 - Estilo "Cobertura de Morango" */
+    .btn-cadastrar.type1 {
+      background: linear-gradient(to right, var(--primary-color), var(--dark-accent));
+      box-shadow: 0 4px 15px rgba(231, 84, 128, 0.3);
+    }
+    
+    .btn-cadastrar.type1:hover {
+      background: linear-gradient(to right, var(--dark-accent), var(--primary-color));
+      transform: translateY(-2px);
+    }
+    
+    /* Botão 2 - Estilo "Chantilly" */
+    .btn-cadastrar.type2 {
+      background-color: white;
+      border: 2px solid var(--primary-color);
+      color: var(--dark-accent);
+    }
+    
+    .btn-cadastrar.type2:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    /* Botão 3 - Estilo "Confeitos" */
+    .btn-cadastrar.type3 {
+      background: linear-gradient(45deg, 
+        var(--primary-color) 25%, 
+        var(--accent-color) 25%, 
+        var(--accent-color) 50%, 
+        var(--primary-color) 50%, 
+        var(--primary-color) 75%, 
+        var(--accent-color) 75%);
+      background-size: 20px 20px;
+      animation: confeitos 2s linear infinite;
+    }
+    
+    @keyframes confeitos {
+      0% { background-position: 0 0; }
+      100% { background-position: 40px 40px; }
+    }
+    
+    /* Botão 4 - Estilo "Gotas de Chocolate" */
+    .btn-cadastrar.type4 {
+      background-color: var(--brown-color);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-cadastrar.type4::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, white 10%, transparent 10%);
+      background-size: 15px 15px;
+      opacity: 0.3;
+      transform: rotate(30deg);
+    }
+    
+    .btn-cadastrar.type4:hover {
+      background-color: #C99789;
+    }
+    
+    .nav-links {
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    .nav-links a {
+      color: var(--dark-accent);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      position: relative;
+    }
+    
+    .nav-links a:hover {
+      color: var(--primary-color);
+    }
+    
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: var(--accent-color);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+    }
+    
+    .btn-options {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .btn-style {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s;
+      border: 2px solid white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .btn-style:hover {
+      transform: scale(1.1);
+    }
+    
+    .btn-style.type1 { background: linear-gradient(to right, var(--primary-color), var(--dark-accent)); }
+    .btn-style.type2 { background-color: white; border: 2px solid var(--primary-color); }
+    .btn-style.type3 { background: linear-gradient(45deg, var(--primary-color) 25%, var(--accent-color) 25%, var(--accent-color) 50%, var(--primary-color) 50%, var(--primary-color) 75%, var(--accent-color) 75%); background-size: 10px 10px; }
+    .btn-style.type4 { background-color: var(--brown-color); }
+    
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-family: 'Pacifico', cursive;
+      color: var(--dark-accent);
+      font-size: 1.5rem;
+    }
+    
+    .cake-icon {
+      position: absolute;
+      opacity: 0.1;
+      z-index: 0;
+    }
+    
+    .cake-icon-1 {
+      top: 20px;
+      right: 30px;
+      font-size: 3rem;
+      color: var(--primary-color);
+    }
+    
+    .cake-icon-2 {
+      bottom: 20px;
+      left: 30px;
+      font-size: 2.5rem;
+      color: var(--brown-color);
+    }
+    
+    @media (max-width: 992px) {
+      .container-custom {
+        width: 90%;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .content {
+        flex-direction: column;
+      }
+      
+      .left-panel, .right-panel {
+        width: 100%;
+        padding: 2rem;
+      }
+      
+      .left-panel {
+        order: 2;
+        text-align: center;
+      }
+      
+      .right-panel {
+        order: 1;
+      }
+      
+      .logo {
+        position: static;
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-custom">
+    <div class="content">
+      <div class="left-panel">
+        <div class="logo">Cheirinho de Bolo</div>
+        <h2>Junte-se à nossa confeitaria!</h2>
+        <p>Cadastre-se para receber ofertas especiais, acompanhar seus pedidos e descobrir as delícias que preparamos com todo carinho para você!</p>
+        <i class="bi bi-cake cake-icon cake-icon-1"></i>
+        <i class="bi bi-cupcake cake-icon cake-icon-2"></i>
+      </div>
+
+      <div class="right-panel">
+        <h2>Cadastre-se</h2>
+        <form id="frmCadastro">
+          <div class="input-group">
+            <i class="bi bi-person"></i>
+            <input type="text" class="form-control" id="txtNome" placeholder="Nome completo" required />
+          </div>
+          <div class="input-group">
+            <i class="bi bi-envelope"></i>
+            <input type="login" class="form-control" id="txtLogin" placeholder="Seu melhor e-mail" required />
+          </div>
+          <div class="input-group">
+            <i class="bi bi-lock"></i>
+            <input type="password" class="form-control" id="txtSenha" placeholder="Crie uma senha" required />
+          </div>
+          
+          <!-- Botão principal -->
+          <button type="submit" class="btn-cadastrar type1" id="mainButton">
+            <i class="bi bi-cake"></i> Assinar Cardápio Doce
+          </button>
+          
+          <!-- Opções de estilo para o botão -->
+          <div class="btn-options">
+            <small>Escolha o estilo do botão:</small>
+            <button type="button" class="btn-style type1" onclick="changeButtonStyle(1)" title="Cobertura de Morango"></button>
+            <button type="button" class="btn-style type2" onclick="changeButtonStyle(2)" title="Chantilly"></button>
+            <button type="button" class="btn-style type3" onclick="changeButtonStyle(3)" title="Confeitos"></button>
+            <button type="button" class="btn-style type4" onclick="changeButtonStyle(4)" title="Gotas de Chocolate"></button>
+          </div>
+        </form>
+        <div class="nav-links">
+          <a href="./login.html"><i class="bi bi-arrow-right-circle"></i> Já tem conta? Faça login aqui</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Função para mudar o estilo do botão
+    function changeButtonStyle(type) {
+      const mainButton = document.getElementById('mainButton');
+      
+      // Remove todas as classes de tipo
+      mainButton.classList.remove('type1', 'type2', 'type3', 'type4');
+      
+      // Adiciona a classe correspondente ao tipo selecionado
+      mainButton.classList.add('type' + type);
+      
+      // Muda o ícone conforme o estilo
+      const icons = ['bi-cake', 'bi-ice-cream', 'bi-balloon', 'bi-cupcake'];
+      mainButton.innerHTML = `<i class="bi ${icons[type-1]}"></i> Assinar Cardápio Doce`;
+    }
+    
+    // Validação do formulário
+    document.getElementById('frmCadastro').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const nome = document.getElementById('txtNome').value;
+      const login = document.getElementById('txtLogin').value;
+      const senha = document.getElementById('txtSenha').value;
+      
+      if(nome && login && senha) {
+        const mainButton = document.getElementById('mainButton');
+        mainButton.innerHTML = '<i class="bi bi-check-circle"></i> Cadastro Concluído!';
+        mainButton.style.background = 'linear-gradient(to right, #4CAF50, #81C784)';
+        mainButton.disabled = true;
+        
+        // Efeito de confete (simplificado)
+        setTimeout(() => {
+          alert('Cadastro realizado com sucesso! Bem-vindo(a) à Cheirinho de Bolo!');
+          this.reset();
+          mainButton.innerHTML = '<i class="bi bi-cake"></i> Assinar Cardápio Doce';
+          mainButton.style.background = '';
+          mainButton.disabled = false;
+          changeButtonStyle(1); // Volta ao estilo padrão
+        }, 1500);
+      } else {
+        alert('Por favor, preencha todos os campos para se cadastrar!');
+      }
+    });
+  </script>
+</body>
+
+</html>

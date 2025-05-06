@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nossos Produtos - Cheirinho de Bolo</title>
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #e63946;
+      --secondary-color: #ff9a8b;
+      --light-color: #fff0f5;
+      --dark-color: #2b2d42;
+      --accent-color: #ff686b;
+      --cream-color: #fff9f2;
+      --chocolate-color: #5c3a21;
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--dark-color);
+      background-color: var(--cream-color);
+      line-height: 1.6;
+    }
+    
+    .logo-font {
+      font-family: 'Pacifico', cursive;
+    }
+    
+    .navbar {
+      background-color: var(--primary-color) !important;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+      padding: 15px 0;
+    }
+    
+    .navbar-brand {
+      font-family: 'Pacifico', cursive;
+      font-size: 2rem;
+      color: white !important;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    }
+    
+    .nav-link {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 500;
+      margin: 0 12px;
+      position: relative;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.9) !important;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: white;
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .page-title {
+      font-family: 'Pacifico', cursive;
+      color: var(--primary-color);
+      font-size: 3rem;
+      margin-bottom: 3rem;
+      position: relative;
+      text-align: center;
+    }
+    
+    .page-title::after {
+      content: '';
+      position: absolute;
+      width: 100px;
+      height: 4px;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--secondary-color);
+      border-radius: 2px;
+    }
+    
+    .product-category {
+      margin-bottom: 5rem;
+    }
+    
+    .category-title {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      color: var(--chocolate-color);
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 0.5rem;
+    }
+    
+    .category-title::after {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 3px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--primary-color);
+      border-radius: 2px;
+    }
+    
+    .card-product {
+      border: none;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+      height: 100%;
+      background-color: white;
+      margin-bottom: 2rem;
+    }
+    
+    .card-product:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+    
+    .card-img-container {
+      height: 280px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    
+    .card-img-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0));
+      z-index: 1;
+    }
+    
+    .card-img-top {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    
+    .card-product:hover .card-img-top {
+      transform: scale(1.1);
+    }
+    
+    .card-body {
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      height: calc(100% - 280px);
+    }
+    
+    .card-title {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      color: var(--chocolate-color);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .card-text {
+      font-family: 'Montserrat', sans-serif;
+      color: #555;
+      flex-grow: 1;
+      margin-bottom: 1.5rem;
+    }
+    
+    .price {
+      color: var(--primary-color);
+      font-weight: 700;
+      font-size: 1.5rem;
+      font-family: 'Quicksand', sans-serif;
+    }
+    
+    .btn-order {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 25px;
+      font-weight: 600;
+      font-family: 'Quicksand', sans-serif;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .btn-order:hover {
+      background-color: var(--accent-color);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(230, 57, 70, 0.3);
+    }
+    
+    .btn-order i {
+      margin-right: 8px;
+    }
+    
+    .product-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 50px;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      z-index: 2;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+    
+    footer {
+      background-color: var(--dark-color);
+      color: white;
+      padding: 4rem 0 2rem;
+      margin-top: 3rem;
+    }
+    
+    .footer-title {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .footer-text {
+      font-family: 'Montserrat', sans-serif;
+      opacity: 0.8;
+      line-height: 1.8;
+    }
+    
+    .footer-links-title {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .footer-contact-item {
+      margin-bottom: 1rem;
+      font-family: 'Montserrat', sans-serif;
+      opacity: 0.8;
+    }
+    
+    .social-icon {
+      font-size: 1.5rem;
+      margin-right: 15px;
+      color: white;
+      transition: all 0.3s;
+      opacity: 0.8;
+    }
+    
+    .social-icon:hover {
+      color: var(--secondary-color);
+      opacity: 1;
+      transform: translateY(-3px);
+    }
+    
+    .divider {
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--secondary-color), transparent);
+      margin: 4rem 0;
+      border: none;
+    }
+    
+    @media (max-width: 768px) {
+      .page-title {
+        font-size: 2.5rem;
+      }
+      
+      .category-title {
+        font-size: 1.8rem;
+      }
+      
+      .card-img-container {
+        height: 220px;
+      }
+      
+      .card-body {
+        height: calc(100% - 220px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <i class="bi bi-cake2"></i> Cheirinho de Bolo
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="produtos.html">Produtos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contato.html">Contato</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="cadastro.html"><i class="bi bi-person"></i> Login/Cadastro</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Produtos -->
+  <section class="py-5">
+    <div class="container py-4">
+      <h1 class="page-title">Nossos Produtos</h1>
+      
+      <!-- Bolos -->
+      <div class="product-category">
+        <h2 class="category-title">Bolos</h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card card-product">
+              <div class="product-badge">Mais vendido</div>
+              <div class="card-img-container">
+                <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587" class="card-img-top" alt="Bolo de Chocolate">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Bolo de Chocolate</h5>
+                <p class="card-text">Massa de chocolate úmida com recheio de brigadeiro e cobertura de ganache. Perfeito para aniversários e eventos especiais.</p>
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                  <span class="price">R$ 85,00</span>
+                  <a href="#" class="btn btn-order">
+                    <i class="bi bi-cart-plus"></i> Encomendar
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card card-product">
+              <div class="card-img-container">
+                <img src="./Bolo-vulcao-de-cenoura-com-brigadeiro.jpg" class="card-img-top" alt="Bolo de Cenoura">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Bolo de Cenoura</h5>
+                <p class="card-text">Massa fofinha de cenoura com cobertura de chocolate cremoso. Uma combinação clássica que nunca sai de moda.</p>
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                  <span class="price">R$ 60,00</span>
+                  <a href="#" class="btn btn-order">
+                    <i class="bi bi-cart-plus"></i> Encomendar
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card card-product">
+              <div class="product-badge">Novidade</div>
+              <div class="card-img-container">
+                <img src="./bolo de red velvet.avif" class="card-img-top" alt="Bolo de Red Velvet">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Bolo Red Velvet</h5>
+                <p class="card-text">Massa aveludada vermelha com recheio de cream cheese. Uma experiência sofisticada de sabor e textura.</p>
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                  <span class="price">R$95,00</span>
+                  <a href="#" class="btn btn-order">
+                    <i class="bi bi-cart-plus"></i> Encomendar
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <hr class="divider">
+      
+      <!-- Doces -->
+      <div class="product-category">
+        <h2 class="category-title">Doces</h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card card-product">
+              <div class="card-img-container">
+                <img src="./cupcakes.jpg" class="card-img-top" alt="Cupcakes Variados">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Cupcakes Variados</h5>
+                <p class="card-text">Deliciosos cupcakes com diversos sabores e decorações personalizadas.</p>
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                  <span class="price">R$ 8,00/un</span>
+                  <a href="#" class="btn btn-order">
+                    <i class="bi bi-cart-plus"></i> Encomendar
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card card-product">
+              <div class="product-badge">Popular</div>
+              <div class="card-img-container">
+                <img src="./caixa_de_brigadeiro_gourmet.jpg" class="card-img-top" alt="Brigadeiros">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Brigadeiros Gourmet</h5>
+                <p class="card-text">Tradicionais e sabores especiais como chocolate, ninho e morango. Perfeitos para lembrancinhas.</p>
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                  <span class="price">R$ 3,00/un</span>
+                  <a href="#" class="btn btn-order">
+                    <i class="bi bi-cart-plus"></i> Encomendar
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card card-product">
+              <div class="card-img-container">
+                <img src="./brownie.jpg" class="card-img-top" alt="Brownie">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Brownie</h5>
+                <p class="card-text">Brownie de chocolate com nozes, servido quente. Pode ser acompanhado de sorvete ou calda.</p>
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                  <span class="price">R$ 9,50/un</span>
+                  <a href="#" class="btn btn-order">
+                    <i class="bi bi-cart-plus"></i> Encomendar
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <hr class="divider">
+      
+      <!-- Salgados -->
+      <div class="product-category">
+        <h2 class="category-title">Salgados</h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card card-product">
+              <div class="card-img-container">
+                <img src="./salgadinhos.webp" class="card-img-top" alt="Salgados de Festa">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Salgados de Festa</h5>
+                <p class="card-text">Variedade de salgados para festas e eventos, fritos na hora.</p>
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                  <span class="price">R$ 3,00/un</span>
+                  <a href="#" class="btn btn-order">
+                    <i class="bi bi-cart-plus"></i> Encomendar
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card card-product">
+              <div class="product-badge">Novidade</div>
+              <div class="card-img-container">
+                <img src="./mini pizzas.jpg" class="card-img-top" alt="Mini Pizzas">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Mini Pizzas</h5>
+                <p class="card-text">Diversos sabores em tamanho individual. Massa fina e crocante com ingredientes frescos.</p>
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                  <span class="price">R$ 7,00/un</span>
+                  <a href="#" class="btn btn-order">
+                    <i class="bi bi-cart-plus"></i> Encomendar
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card card-product">
+              <div class="card-img-container">
+                <img src="./frios.jpeg" class="card-img-top" alt="Tábua de Frios">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Tábuas de Frios</h5>
+                <p class="card-text">Seleção premium de queijos, presuntos, salames e acompanhamentos. Ideal para eventos e reuniões.</p>
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                  <span class="price">R$ 80,00</span>
+                  <a href="#" class="btn btn-order">
+                    <i class="bi bi-cart-plus"></i> Encomendar
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container py-4">
+      <div class="row">
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <h3 class="footer-title">
+            <i class="bi bi-cake2 me-2"></i> Cheirinho de Bolo
+          </h3>
+          <p class="footer-text">Confeitaria artesanal especializada em bolos, doces e salgados para todos os momentos especiais.</p>
+        </div>
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <h4 class="footer-links-title">Contato</h4>
+          <p class="footer-contact-item"><i class="bi bi-geo-alt me-2"></i> Rua dos Sabores, 123 - Centro</p>
+          <p class="footer-contact-item"><i class="bi bi-telephone me-2"></i> (21) 98765-4321</p>
+          <p class="footer-contact-item"><i class="bi bi-envelope me-2"></i> contato@cheirinhodebolo.com</p>
+        </div>
+        <div class="col-lg-4">
+          <h4 class="footer-links-title">Redes Sociais</h4>
+          <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="bi bi-whatsapp"></i></a>
+          <a href="#" class="social-icon"><i class="bi bi-messenger"></i></a>
+        </div>
+      </div>
+      <hr class="my-4 bg-light">
+      <div class="text-center">
+        <p class="mb-0" style="font-family: 'Montserrat', sans-serif; opacity: 0.7;">&copy; 2023 Cheirinho de Bolo. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
