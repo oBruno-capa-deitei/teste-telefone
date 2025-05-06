@@ -48,6 +48,7 @@ app.post('/api/mysql', async (req, res) => {
             case 'leitura':
                 var addNome = "";
                 var addLogin = "";
+                var addTelefone = "";
                 var addAnd = "";
 
                 if (nome.trim().length > 0) {
@@ -57,13 +58,16 @@ app.post('/api/mysql', async (req, res) => {
                 if (login.trim().length > 0) {
                     addLogin = " `login` like '%" + login + "%' ";
                 }
+                if (login.trim().length > 0) {
+                    addTelefone = " `telefone` like '%" + telefone + "%' ";
+                }
 
                 if (nome.trim().length > 0 && login.trim().length > 0) {
                     addAnd = " and ";
                 }
 
                 var strSql = "select * from `freedb_bruno_host`.`tbl_login` where" + 
-                    addNome + addAnd + addLogin + ";";
+                    addNome + addAnd + addLogin + addTelefone + ";";
                 var [rows, fields] = await pool.query(strSql);
                 if (rows.length > 0) {
                     res.json({ 
@@ -71,6 +75,7 @@ app.post('/api/mysql', async (req, res) => {
                         id: rows[0].id,
                         nome: rows[0].nome,
                         login: rows[0].login,
+                        telefone: rows[0].telefone,
                         linhas: rows.length
                     });
                 } else {
@@ -131,7 +136,7 @@ app.post('/api/mysql', async (req, res) => {
                     addTelefone = " `telefone` = '" + telefone + "' ";
                 }
 
-                if (addLogin.length > 0) {
+                if (addTelefone.length > 0) {
                     addTelefone = " , " + addTelefone;
                 }
 
